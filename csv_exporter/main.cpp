@@ -68,17 +68,26 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-void parse_cOMC(const std::string& logDir, const Config& config, double data[2]);
-void parse_cOMCFrontend(const std::string& logDir, const Config& config, double data[2][4]);
-void parse_cMARCOOnly(const std::string& logDir, const Config& config, double data[2][4]);
-void parse_sMARCOwoMT(const std::string& logDir, const Config& config, double data[2]);
-void parse_sMARCOwMT(const std::string& logDir, const Config& config, double data[2]);
-void parse_sOMC(const std::string& logDir, const Config& config, double data[2]);
-void parse_csMARCObmodelica(const std::string& logDir, const Config& config, long long int data[4]);
-void parse_csMARCOLLVMIR(const std::string& logDir, const Config& config, long long int data[4]);
-void parse_csMARCOBinary(const std::string& logDir, const Config& config, long long int& data);
-void parse_csOMCC(const std::string& logDir, const Config& config, long long int& data);
-void parse_csOMCBinary(const std::string& logDir, const Config& config, long long int& data);
+bool parse_cOMC(const std::string& logDir, const Config& config, double data[2]);
+bool parse_cOMCFrontend(const std::string& logDir, const Config& config, double data[2][4]);
+bool parse_cMARCOOnly(const std::string& logDir, const Config& config, double data[2][4]);
+bool parse_sMARCOwoMT(const std::string& logDir, const Config& config, double data[2]);
+bool parse_sMARCOwMT(const std::string& logDir, const Config& config, double data[2]);
+bool parse_sOMC(const std::string& logDir, const Config& config, double data[2]);
+bool parse_csMARCObmodelica(const std::string& logDir, const Config& config, long long int data[4]);
+bool parse_csMARCOLLVMIR(const std::string& logDir, const Config& config, long long int data[4]);
+bool parse_csMARCOBinary(const std::string& logDir, const Config& config, long long int& data);
+bool parse_csOMCC(const std::string& logDir, const Config& config, long long int& data);
+bool parse_csOMCBinary(const std::string& logDir, const Config& config, long long int& data);
+
+template<typename T>
+void printValue(std::ostream& os, T value) {
+    if (value != -1) {
+        os << value;
+    }
+
+    os << ",";
+}
 
 void run(const std::string& logDir, const std::vector<Config>& configs) {
     std::cout << "nx,ny,nz,eq,";
@@ -126,26 +135,48 @@ void run(const std::string& logDir, const std::vector<Config>& configs) {
 
         std::cout << config.nx << "," << config.ny << "," << config.nz << "," << config.equations << ",";
 
-        std::cout << cOMC[0] << ",";
-        std::cout << cOMCFrontend[0][0] << "," << cMARCOOnly[0][0] << ",";
-        std::cout << cOMCFrontend[0][1] << "," << cMARCOOnly[0][1] << ",";
-        std::cout << cOMCFrontend[0][2] << "," << cMARCOOnly[0][2] << ",";
-        std::cout << cOMCFrontend[0][3] << "," << cMARCOOnly[0][3] << ",";
+        printValue(std::cout, cOMC[0]);
 
-        std::cout << cOMC[1] << ",";
-        std::cout << cOMCFrontend[1][0] << "," << cMARCOOnly[1][0] << ",";
-        std::cout << cOMCFrontend[1][1] << "," << cMARCOOnly[1][1] << ",";
-        std::cout << cOMCFrontend[1][2] << "," << cMARCOOnly[1][2] << ",";
-        std::cout << cOMCFrontend[1][3] << "," << cMARCOOnly[1][3] << ",";
+        printValue(std::cout, cOMCFrontend[0][0]);
+        printValue(std::cout, cMARCOOnly[0][0]);
+        printValue(std::cout, cOMCFrontend[0][1]);
+        printValue(std::cout, cMARCOOnly[0][1]);
+        printValue(std::cout, cOMCFrontend[0][2]);
+        printValue(std::cout, cMARCOOnly[0][2]);
+        printValue(std::cout, cOMCFrontend[0][3]);
+        printValue(std::cout, cMARCOOnly[0][3]);
 
-        std::cout << sMARCOwoMT[0] << "," << sMARCOwMT[0] << "," << sOMC[0] << ",";
-        std::cout << sMARCOwoMT[1] << "," << sMARCOwMT[1] << "," << sOMC[1] << ",";
+        printValue(std::cout, cOMC[1]);
 
-        std::cout << csMARCObmodelica[0] << "," << csMARCOLLVMIR[0] << ",";
-        std::cout << csMARCObmodelica[1] << "," << csMARCOLLVMIR[1] << ",";
-        std::cout << csMARCObmodelica[2] << "," << csMARCOLLVMIR[2] << ",";
-        std::cout << csMARCObmodelica[3] << "," << csMARCOLLVMIR[3] << ",";
-        std::cout << csMARCOBinary << "," << csOMCC << "," << csOMCBinary << ",";
+        printValue(std::cout, cOMCFrontend[1][0]);
+        printValue(std::cout, cMARCOOnly[1][0]);
+        printValue(std::cout, cOMCFrontend[1][1]);
+        printValue(std::cout, cMARCOOnly[1][1]);
+        printValue(std::cout, cOMCFrontend[1][2]);
+        printValue(std::cout, cMARCOOnly[1][2]);
+        printValue(std::cout, cOMCFrontend[1][3]);
+        printValue(std::cout, cMARCOOnly[1][3]);
+
+        printValue(std::cout, sMARCOwoMT[0]);
+        printValue(std::cout, sMARCOwMT[0]);
+        printValue(std::cout, sOMC[0]);
+
+        printValue(std::cout, sMARCOwoMT[1]);
+        printValue(std::cout, sMARCOwMT[1]);
+        printValue(std::cout, sOMC[1]);
+
+        printValue(std::cout, csMARCObmodelica[0]);
+        printValue(std::cout, csMARCOLLVMIR[0]);
+        printValue(std::cout, csMARCObmodelica[1]);
+        printValue(std::cout, csMARCOLLVMIR[1]);
+        printValue(std::cout, csMARCObmodelica[2]);
+        printValue(std::cout, csMARCOLLVMIR[2]);
+        printValue(std::cout, csMARCObmodelica[3]);
+        printValue(std::cout, csMARCOLLVMIR[3]);
+
+        printValue(std::cout, csMARCOBinary);
+        printValue(std::cout, csOMCC);
+        printValue(std::cout, csOMCBinary);
 
         std::cout << std::endl;
     }
@@ -166,10 +197,10 @@ std::pair<TimeStatistics, TimeStatistics> parseRealUserTimes(FILE* f) {
     fscanf(f, " Max: %lf", &result.first.max);
     fscanf(f, " ------");
     fscanf(f, " User time");
-    fscanf(f, " Average: %lf", &result.first.average);
-    fscanf(f, " Median: %lf", &result.first.median);
-    fscanf(f, " Min: %lf", &result.first.min);
-    fscanf(f, " Max: %lf", &result.first.max);
+    fscanf(f, " Average: %lf", &result.second.average);
+    fscanf(f, " Median: %lf", &result.second.median);
+    fscanf(f, " Min: %lf", &result.second.min);
+    fscanf(f, " Max: %lf", &result.second.max);
 
     return result;
 }
@@ -195,24 +226,39 @@ SizeStatistics parseSizeStatistics(FILE* f) {
     return result;
 }
 
-void parse_cOMC(const std::string& logDir, const Config& config, double data[2]) {
-    for (size_t i = 0; i < 2; ++i) {
-        data[i] = 0;
+bool parse_cOMC(const std::string& logDir, const Config& config, double data[2]) {
+    std::string filePath = logDir + "/omc/omc-time_" + getConfigString(config) + ".txt";
+    FILE* f = fopen(filePath.c_str(), "r");
+
+    if (!f) {
+        for (size_t i = 0; i < 2; ++i) {
+            data[i] = -1;
+        }
+
+        return false;
     }
+
+    auto time = parseTimeMeasure(f);
+
+    data[0] = time.real;
+    data[1] = time.user;
+
+    fclose(f);
+    return true;
 }
 
-void parse_cOMCFrontend(const std::string& logDir, const Config& config, double data[2][4]) {
+bool parse_cOMCFrontend(const std::string& logDir, const Config& config, double data[2][4]) {
     std::string filePath = logDir + "/marco/omc-time_" + getConfigString(config) + ".txt";
     FILE* f = fopen(filePath.c_str(), "r");
 
     if (!f) {
         for (size_t i = 0; i < 2; ++i) {
             for (size_t j = 0; j < 4; ++j) {
-                data[i][j] = 0;
+                data[i][j] = -1;
             }
         }
 
-        return;
+        return false;
     }
 
     auto times = parseRealUserTimes(f);
@@ -228,20 +274,21 @@ void parse_cOMCFrontend(const std::string& logDir, const Config& config, double 
     data[1][3] = times.second.max;
 
     fclose(f);
+    return true;
 }
 
-void parse_cMARCOOnly(const std::string& logDir, const Config& config, double data[2][4]) {
+bool parse_cMARCOOnly(const std::string& logDir, const Config& config, double data[2][4]) {
     std::string filePath = logDir + "/marco/marco-compile-time_" + getConfigString(config) + ".txt";
     FILE* f = fopen(filePath.c_str(), "r");
 
     if (!f) {
         for (size_t i = 0; i < 2; ++i) {
             for (size_t j = 0; j < 4; ++j) {
-                data[i][j] = 0;
+                data[i][j] = -1;
             }
         }
 
-        return;
+        return false;
     }
 
     auto times = parseRealUserTimes(f);
@@ -257,14 +304,19 @@ void parse_cMARCOOnly(const std::string& logDir, const Config& config, double da
     data[1][3] = times.second.max;
 
     fclose(f);
+    return true;
 }
 
-void parse_sMARCOwoMT(const std::string& logDir, const Config& config, double data[2]) {
+bool parse_sMARCOwoMT(const std::string& logDir, const Config& config, double data[2]) {
     std::string filePath = logDir + "/marco/simulation-non-parallel-time_" + getConfigString(config) + ".txt";
     FILE* f = fopen(filePath.c_str(), "r");
 
     if (!f) {
-        return;
+        for (size_t i = 0; i < 2; ++i) {
+            data[i] = -1;
+        }
+
+        return false;
     }
 
     auto time = parseTimeMeasure(f);
@@ -273,18 +325,19 @@ void parse_sMARCOwoMT(const std::string& logDir, const Config& config, double da
     data[1] = time.user;
 
     fclose(f);
+    return true;
 }
 
-void parse_sMARCOwMT(const std::string& logDir, const Config& config, double data[2]) {
+bool parse_sMARCOwMT(const std::string& logDir, const Config& config, double data[2]) {
     std::string filePath = logDir + "/marco/simulation-parallel-time_" + getConfigString(config) + ".txt";
     FILE* f = fopen(filePath.c_str(), "r");
 
     if (!f) {
         for (size_t i = 0; i < 2; ++i) {
-            data[i] = 0;
+            data[i] = -1;
         }
 
-        return;
+        return false;
     }
 
     auto time = parseTimeMeasure(f);
@@ -293,24 +346,40 @@ void parse_sMARCOwMT(const std::string& logDir, const Config& config, double dat
     data[1] = time.user;
 
     fclose(f);
+    return true;
 }
 
-void parse_sOMC(const std::string& logDir, const Config& config, double data[2]) {
-    for (size_t i = 0; i < 2; ++i) {
-        data[i] = 0;
+bool parse_sOMC(const std::string& logDir, const Config& config, double data[2]) {
+    std::string filePath = logDir + "/omc/simulation-time_" + getConfigString(config) + ".txt";
+    FILE* f = fopen(filePath.c_str(), "r");
+
+    if (!f) {
+        for (size_t i = 0; i < 2; ++i) {
+            data[i] = -1;
+        }
+
+        return false;
     }
+
+    auto time = parseTimeMeasure(f);
+
+    data[0] = time.real;
+    data[1] = time.user;
+
+    fclose(f);
+    return true;
 }
 
-void parse_csMARCObmodelica(const std::string& logDir, const Config& config, long long int data[4]) {
+bool parse_csMARCObmodelica(const std::string& logDir, const Config& config, long long int data[4]) {
     std::string filePath = logDir + "/marco/bmodelica-size_" + getConfigString(config) + ".txt";
     FILE* f = fopen(filePath.c_str(), "r");
 
     if (!f) {
         for (size_t i = 0; i < 4; ++i) {
-            data[i] = 0;
+            data[i] = -1;
         }
 
-        return;
+        return false;
     }
 
     auto size = parseSizeStatistics(f);
@@ -321,18 +390,19 @@ void parse_csMARCObmodelica(const std::string& logDir, const Config& config, lon
     data[3] = size.max;
 
     fclose(f);
+    return true;
 }
 
-void parse_csMARCOLLVMIR(const std::string& logDir, const Config& config, long long int data[4]) {
+bool parse_csMARCOLLVMIR(const std::string& logDir, const Config& config, long long int data[4]) {
     std::string filePath = logDir + "/marco/llvmir-size_" + getConfigString(config) + ".txt";
     FILE* f = fopen(filePath.c_str(), "r");
 
     if (!f) {
         for (size_t i = 0; i < 4; ++i) {
-            data[i] = 0;
+            data[i] = -1;
         }
 
-        return;
+        return false;
     }
 
     auto size = parseSizeStatistics(f);
@@ -343,25 +413,47 @@ void parse_csMARCOLLVMIR(const std::string& logDir, const Config& config, long l
     data[3] = size.max;
 
     fclose(f);
+    return true;
 }
 
-void parse_csMARCOBinary(const std::string& logDir, const Config& config, long long int& data) {
+bool parse_csMARCOBinary(const std::string& logDir, const Config& config, long long int& data) {
     std::string filePath = logDir + "/marco/marco-non-parallel-binary-size_" + getConfigString(config) + ".txt";
     FILE* f = fopen(filePath.c_str(), "r");
 
     if (!f) {
-        data = 0;
-        return;
+        data = -1;
+        return false;
     }
 
     fscanf(f, "%lld", &data);
     fclose(f);
+    return true;
 }
 
-void parse_csOMCC(const std::string& logDir, const Config& config, long long int& data) {
-    data = 0;
+bool parse_csOMCC(const std::string& logDir, const Config& config, long long int& data) {
+    std::string filePath = logDir + "/omc/omc-c-size_" + getConfigString(config) + ".txt";
+    FILE* f = fopen(filePath.c_str(), "r");
+
+    if (!f) {
+        data = -1;
+        return false;
+    }
+
+    fscanf(f, "%lld", &data);
+    fclose(f);
+    return true;
 }
 
-void parse_csOMCBinary(const std::string& logDir, const Config& config, long long int& data) {
-    data = 0;
+bool parse_csOMCBinary(const std::string& logDir, const Config& config, long long int& data) {
+    std::string filePath = logDir + "/omc/omc-binary-size_" + getConfigString(config) + ".txt";
+    FILE* f = fopen(filePath.c_str(), "r");
+
+    if (!f) {
+        data = -1;
+        return false;
+    }
+
+    fscanf(f, "%lld", &data);
+    fclose(f);
+    return true;
 }
