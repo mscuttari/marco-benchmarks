@@ -107,11 +107,11 @@ void run(const std::string& logDir, const std::vector<Config>& configs) {
     std::cout << "[s] MARCO w/o MT - real,[s] MARCO w/ MT - real,[s] OMC - real,";
     std::cout << "[s] MARCO w/o MT - user,[s] MARCO w/ MT - user,[s] OMC - user,";
 
-    std::cout << "[cs] MARCO bmodelica - real,[cs] MARCO LLVM-IR - real,";
+    std::cout << "[cs] MARCO bmodelica - average,[cs] MARCO LLVM-IR - average,";
     std::cout << "[cs] MARCO bmodelica - median,[cs] MARCO LLVM-IR - median,";
     std::cout << "[cs] MARCO bmodelica - min,[cs] MARCO LLVM-IR - min,";
     std::cout << "[cs] MARCO bmodelica - max,[cs] MARCO LLVM-IR - max,";
-    std::cout << "[cs] MARCO binary,[cs]OMC C - real,[cs] OMC binary - real,";
+    std::cout << "[cs] MARCO binary,[cs]OMC C,[cs] OMC binary,";
 
     std::cout << std::endl;
 
