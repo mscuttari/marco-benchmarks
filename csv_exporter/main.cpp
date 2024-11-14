@@ -14,23 +14,23 @@ struct Config {
 };
 
 struct TimeMeasure {
-    double real;
-    double user;
-    double sys;
+    double real{-1};
+    double user{-1};
+    double sys{-1};
 };
 
 struct TimeStatistics {
-    double average;
-    double median;
-    double min;
-    double max;
+    double average{-1};
+    double median{-1};
+    double min{-1};
+    double max{-1};
 };
 
 struct SizeStatistics {
-    long long int average;
-    long long int median;
-    long long int min;
-    long long int max;
+    long long int average{-1};
+    long long int median{-1};
+    long long int min{-1};
+    long long int max{-1};
 };
 
 void run(const std::string& logDir, const std::vector<Config>& configs);
