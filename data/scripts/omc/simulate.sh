@@ -8,5 +8,5 @@ nz=$3
 solver=$4
 
 TIME_FILE=$LOG_DIR/simulation-time_$nx-$ny-$nz-$solver.txt
-/usr/bin/time -p -o $TIME_FILE "$path/simulation_run.sh" $BUILD_DIR ThermalChipOO.Models.ThermalChipSimpleBoundary
+/usr/bin/time -p -o $TIME_FILE "$path/simulation_run.sh" $BUILD_DIR ThermalChipOO.Models.ThermalChipSimpleBoundary || exit 1
 cat $TIME_FILE

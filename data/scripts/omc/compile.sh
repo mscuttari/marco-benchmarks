@@ -7,8 +7,14 @@ ny=$2
 nz=$3
 solver=$4
 
+fail() {
+	rm -r "$BUILD_DIR"
+	mkdir -p "$BUILD_DIR"
+	exit 1
+}
+
 "$path/mos_builder_$solver.sh" $nx $ny $nz $BUILD_DIR/script.mos $RESULTS_DIR/results_$nx-$ny-$nz-$solver.csv
-/usr/bin/time -p -o $LOG_DIR/omc-time_$nx-$ny-$nz-$solver.txt "$path/run_mos.sh" $BUILD_DIR
+/usr/bin/time -p -o $LOG_DIR/omc-time_$nx-$ny-$nz-$solver.txt "$path/run_mos.sh" $BUILD_DIR || fail
 
 echo "Binary size: "
 BINARY_SIZE_FILE=$LOG_DIR/omc-binary-size_$nx-$ny-$nz-$solver.txt
