@@ -12,7 +12,6 @@ echo "setCommandLineOptions(\"--daeMode\")" >> $outfile
 echo "getErrorString();" >> $outfile
 echo "buildModel(" >> $outfile
 echo "    ThermalChipOO.Models.ThermalChipSimpleBoundary," >> $outfile
-echo "    method=\"ida\"," >> $outfile
 echo "    stopTime=0.4," >> $outfile
 echo "    outputFormat=\"csv\"," >> $outfile
 echo "    variableFilter=\"Tct1|Tct2|Tct3|Tct4|Tcb1|Tcb2|Tcb3|Tcb4\"," >> $outfile
