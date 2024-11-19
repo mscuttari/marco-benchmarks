@@ -22,7 +22,7 @@ echo "---------------------------------------------"
 echo "Generate Base Modelica"
 OMC_TIMES_FILE=$BUILD_DIR/omc-times_$nx-$ny_$nz-$solver.txt
 
-for i in {1..$NUM_RUNS}
+for ((i = 0; i <= $NUM_RUNS; i++))
 do
 	/usr/bin/time -p -a -o $OMC_TIMES_FILE omc $SRC_DIR/ThermalChipOO-$nx-$ny-$nz.mo -i=ThermalChipOO.Models.ThermalChipSimpleBoundary $OMC_FLAGS &> /dev/null
 done
@@ -47,7 +47,7 @@ echo "Generating code sizes"
 MODELICA_DIALECT_SIZES_FILE=$LOG_DIR/bmodelica-sizes_$nx-$ny-$nz-$solver.txt
 LLVMIR_SIZES_FILE=$LOG_DIR/llvmir-sizes_$nx-$ny-$nz-$solver.txt
 
-for i in {1..$NUM_RUNS}
+for ((i = 0; i <= $NUM_RUNS; i++))
 do
 marco \
   -mc1 \
@@ -106,7 +106,7 @@ echo "---------------------------------------------"
 echo "Build non-parallel simulation"
 MARCO_COMPILE_TIMES_FILE=$LOG_DIR/marco-compile-times-non-parallel_$nx-$ny-$nz-$solver.txt
 
-for i in {1..$NUM_RUNS}
+for ((i = 0; i <= $NUM_RUNS; i++))
 do
 /usr/bin/time -p -a -o $MARCO_COMPILE_TIMES_FILE marco \
   $BUILD_DIR/ThermalChipOO-flat-fixed-$nx-$ny-$nz.mo \
