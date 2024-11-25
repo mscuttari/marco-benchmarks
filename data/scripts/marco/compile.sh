@@ -10,6 +10,9 @@ solver=$4
 NUM_RUNS=10
 OMC_FLAGS="--baseModelica -d=nonfScalarize,arrayConnect,combineSubscripts,evaluateAllParameters,vectorizeBindings"
 
+rm -rf "$BUILD_DIR"
+mkdir -p "$BUILD_DIR"
+
 echo "---------------------------------------------"
 echo "Compile tool for time statistics"
 g++ "$path/time_stat.cpp" -o $BUILD_DIR/time_stat

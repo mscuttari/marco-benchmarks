@@ -8,10 +8,13 @@ nz=$3
 solver=$4
 
 fail() {
-	rm -r "$BUILD_DIR"
+	rm -rf "$BUILD_DIR"
 	mkdir -p "$BUILD_DIR"
 	exit 1
 }
+
+rm -rf "$BUILD_DIR"
+mkdir -p "$BUILD_DIR"
 
 "$path/mos_builder_$solver.sh" $nx $ny $nz $BUILD_DIR/script.mos $RESULTS_DIR/results_$nx-$ny-$nz-$solver.csv
 /usr/bin/time -p -o $LOG_DIR/omc-time_$nx-$ny-$nz-$solver.txt "$path/run_mos.sh" $BUILD_DIR || fail
