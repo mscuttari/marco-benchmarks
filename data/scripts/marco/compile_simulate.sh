@@ -12,8 +12,11 @@ echo "nx=$nx, ny=$ny, nz=$nz, solver=$solver"
 echo "Compiling"
 timeout $COMPILE_TIMEOUT "$path/compile.sh" $nx $ny $nz $solver
 
-echo "Simulating"
-timeout $SIMULATE_TIMEOUT "$path/simulate.sh" $nx $ny $nz $solver ${@:5}
+echo "Simulating w/ MT"
+timeout $SIMULATE_TIMEOUT "$path/simulate.sh" $nx $ny $nz parallel $solver ${@:5}
+
+echo "Simulating w/o MT"
+timeout $SIMULATE_TIMEOUT "$path/simulate.sh" $nx $ny $nz non-parallel $solver ${0:5}
 
 echo "-----------------------------------"
 echo ""
