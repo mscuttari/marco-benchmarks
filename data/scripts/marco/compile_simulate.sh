@@ -16,7 +16,7 @@ echo "Simulating w/ MT"
 timeout $SIMULATE_TIMEOUT "$path/simulate.sh" $nx $ny $nz parallel $solver ${@:5}
 
 echo "Simulating w/o MT"
-timeout $SIMULATE_TIMEOUT "$path/simulate.sh" $nx $ny $nz non-parallel $solver ${0:5}
+timeout $SIMULATE_TIMEOUT "$path/simulate.sh" $nx $ny $nz non-parallel $solver ${@:5}
 
 echo "-----------------------------------"
 echo ""
