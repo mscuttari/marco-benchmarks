@@ -6,6 +6,7 @@ nx=$1
 ny=$2
 nz=$3
 solver=$4
+sim_args=${@:5}
 
 fail() {
 	rm -r "$BUILD_DIR"
@@ -21,7 +22,7 @@ echo "Compiling"
 timeout $COMPILE_TIMEOUT "$path/compile.sh" $nx $ny $nz $solver || fail
 
 echo "Simulating"
-timeout $SIMULATE_TIMEOUT "$path/simulate.sh" $nx $ny $nz $solver || fail
+timeout $SIMULATE_TIMEOUT "$path/simulate.sh" $nx $ny $nz $solver $sim_args || fail
 
 echo "-----------------------------------"
 echo ""

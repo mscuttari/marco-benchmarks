@@ -10,4 +10,4 @@ mkdir -p $LOG_DIR
 mkdir -p $RESULTS_DIR
 
 "$path/compile_simulate_all.sh" euler-forward
-"$path/compile_simulate_all.sh" ida
+"$path/compile_simulate_all.sh" ida -noEquidistantTimeGrid
